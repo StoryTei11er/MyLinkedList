@@ -4,6 +4,26 @@ public class Main {
 
     public static void main(String[] args) {
 
+        LinkedList linkedList = new LinkedList();
+
+//        linkedList.add(null);
+        linkedList.add(32); // index: 0
+        linkedList.add(67); // index: 1
+        linkedList.add(34); // index: 2
+        linkedList.add(33); // index: 3
+
+        System.out.println(linkedList.contains(67));
+//        System.out.println(linkedList.remove(0));
+        System.out.println(linkedList.remove(Integer.valueOf(32)));
+
+
+
+
+
+        System.out.println("===============================");
+        for (int i =0; i< linkedList.size(); i++){
+            System.out.println(linkedList.get(i));
+        }
 
     }
 }

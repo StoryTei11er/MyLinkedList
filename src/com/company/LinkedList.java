@@ -13,26 +13,46 @@ public class LinkedList<T> implements List<T> {
         firstNode = new Node<T>(null, null, lastNode);
     }
 
+    //Work
     @Override
     public int size() {
         return this.size;
     }
 
+    //Work
     @Override
     public boolean isEmpty() {
-        return false;
+        boolean isEmpty;
+
+        if (size == 0) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+        return isEmpty;
     }
 
+    //Work
     @Override
     public boolean contains(Object o) {
-        return false;
+        boolean isContain = false;
+
+        for (int i = 0; i <= size; i++) {
+            try {
+                T finderElement = get(i);
+                if (finderElement.equals(o)) {
+                    isContain = true;
+                }
+            } catch (NullPointerException ignored) {
+            }
+        }
+        return isContain;
     }
 
-    //Сделал
+    //Work
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-
             int counter = 0;
 
             @Override
@@ -57,21 +77,36 @@ public class LinkedList<T> implements List<T> {
         return null;
     }
 
-    //Сделал
+    //Work
     @Override
     public boolean add(T t) {
-        Node<T> next = firstNode;
+        Node<T> next = lastNode;
         next.setElement(t);
-        firstNode = new Node<>(null, null, next);
-        next.setPreviousElement(firstNode);
+        lastNode = new Node<>(null, next, null);
+        next.setNextElement(lastNode);
         size++;
 
-        return false;
+        return true;
     }
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        boolean isRemoved = false;
+        Node<T> node = firstNode;
+        for (int i = 0; i <= size; i++) {
+            try {
+                node = getNextNode(node);
+                if (node.getElement().equals(o) && i == 0) {
+                    removeNode(node);
+                    isRemoved = true;
+                } else if (node.getElement().equals(o) && i != 0) {
+                    // Тут будет вызов метода для удаления первого узла
+                    isRemoved = true;
+                }
+            } catch (NullPointerException ignored) {
+            }
+        }
+        return isRemoved;
     }
 
     @Override
@@ -101,10 +136,9 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public void clear() {
-
     }
 
-    //Сделал
+    //Work
     @Override
     public T get(int index) {
         Node<T> target = firstNode.getNextElement();
@@ -126,6 +160,21 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
+        T target = get(index);
+        Node<T> node = firstNode;
+        if (index == 0) {
+            // Тут будет вызов метода для удаления первого узла
+        } else {
+            for (int i = 0; i < size; i++) {
+                try {
+                    node = getNextNode(node);
+                    if (node.getElement().equals(target)) {
+                        removeNode(node);
+                    }
+                } catch (NullPointerException ignored) {
+                }
+            }
+        }
         return null;
     }
 
@@ -154,11 +203,27 @@ public class LinkedList<T> implements List<T> {
         return null;
     }
 
+    //Берёт элемент переданной ноды и переходит на следующую ноду.
     private Node<T> getNextNode(Node<T> currentTarget) {
         return currentTarget.getNextElement();
     }
 
-    //Сделал
+    //Удаляет переданную ноду за исключением первой
+    private void removeNode(Node<T> currentNode) {
+        Node<T> previous = currentNode.getPreviousElement();
+        Node<T> next = currentNode.getNextElement();
+
+        next.setPreviousElement(previous);
+        previous.setNextElement(next);
+
+        currentNode.setNextElement(null);
+        currentNode.setPreviousElement(null);
+        currentNode.setElement(null);
+        size--;
+    }
+
+
+    //Work
     private class Node<T> {
 
         private T element;
@@ -196,3 +261,5 @@ public class LinkedList<T> implements List<T> {
         }
     }
 }
+
+
