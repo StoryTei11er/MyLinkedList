@@ -122,9 +122,23 @@ public class LinkedList<T> implements List<T> {
         return isRemoved;
     }
 
+    //Work
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean isContain = false;
+        int counter = 0;
+        T[] temp = (T[]) toArray();
+        for (T t : temp) {
+            for (Object o : c) {
+                if (t.equals(o)) {
+                    counter++;
+                }
+            }
+        }
+        if (counter == c.size()) {
+            isContain = true;
+        }
+        return isContain;
     }
 
     @Override
@@ -139,11 +153,13 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
+
         return false;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
+        //ignored
         return false;
     }
 
@@ -153,7 +169,6 @@ public class LinkedList<T> implements List<T> {
         while (size != 0) {
             remove(0);
         }
-
     }
 
     //Work
@@ -261,9 +276,12 @@ public class LinkedList<T> implements List<T> {
         return null;
     }
 
+    //Work
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        return null;
+        T[] temp = (T[]) toArray();
+        T[] sublist = Arrays.copyOfRange(temp, fromIndex, toIndex);
+        return Arrays.asList(sublist);
     }
 
     //Work
