@@ -136,8 +136,13 @@ public class LinkedList<T> implements List<T> {
         return false;
     }
 
+    //Work
     @Override
     public void clear() {
+        while (size != 0) {
+            remove(0);
+        }
+
     }
 
     //Work
@@ -168,7 +173,7 @@ public class LinkedList<T> implements List<T> {
         if (index == 0) {
             removeFirstNodeByIndex(node);
         } else {
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i <= size; i++) {
                 try {
                     node = getNextNode(node);
                     if (node.getElement().equals(target)) {
@@ -181,14 +186,37 @@ public class LinkedList<T> implements List<T> {
         return null;
     }
 
+    //Work
     @Override
     public int indexOf(Object o) {
-        return 0;
+        int finderIndex = 0;
+        for (int i = 0; i <= size; i++) {
+            try {
+                T finderElement = get(i);
+                if (finderElement.equals(o)) {
+                    finderIndex = i;
+                    break;
+                }
+            } catch (NullPointerException ignored) {
+            }
+        }
+        return finderIndex;
     }
 
+    //Work
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        int finderIndex = 0;
+        for (int i = 0; i <= size; i++) {
+            try {
+                T finderElement = get(i);
+                if (finderElement.equals(o)) {
+                    finderIndex = i;
+                }
+            } catch (NullPointerException ignored) {
+            }
+        }
+        return finderIndex;
     }
 
     @Override

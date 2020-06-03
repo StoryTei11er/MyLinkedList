@@ -6,15 +6,14 @@ public class Main {
 
         LinkedList linkedList = new LinkedList();
 
-//        linkedList.add(null);
-        linkedList.add(32); // index: 0
-        linkedList.add(67); // index: 1
-        linkedList.add(34); // index: 2
-        linkedList.add(33); // index: 3
 
-        System.out.println(linkedList.contains(67));
-        System.out.println(linkedList.remove(3));
-//        System.out.println(linkedList.remove(Integer.valueOf(33)));
+        linkedList.add(32); // index: 0
+        linkedList.add(32); // index: 1
+        linkedList.add(34); // index: 2
+        linkedList.add(32); // index: 3
+
+        System.out.println(linkedList.indexOf(32));
+        System.out.println(linkedList.lastIndexOf(32));
 
 
 
