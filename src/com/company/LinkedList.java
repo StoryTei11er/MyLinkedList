@@ -89,6 +89,7 @@ public class LinkedList<T> implements List<T> {
         return true;
     }
 
+    //Work
     @Override
     public boolean remove(Object o) {
         boolean isRemoved = false;
@@ -97,10 +98,11 @@ public class LinkedList<T> implements List<T> {
             try {
                 node = getNextNode(node);
                 if (node.getElement().equals(o) && i == 0) {
-                    removeNode(node);
+                    removeFirstNodeByValue(node);
                     isRemoved = true;
+                    break;
                 } else if (node.getElement().equals(o) && i != 0) {
-                    // Тут будет вызов метода для удаления первого узла
+                    removeNode(node);
                     isRemoved = true;
                 }
             } catch (NullPointerException ignored) {
@@ -158,12 +160,13 @@ public class LinkedList<T> implements List<T> {
 
     }
 
+    //Work
     @Override
     public T remove(int index) {
         T target = get(index);
         Node<T> node = firstNode;
         if (index == 0) {
-            // Тут будет вызов метода для удаления первого узла
+            removeFirstNodeByIndex(node);
         } else {
             for (int i = 0; i < size; i++) {
                 try {
@@ -203,11 +206,13 @@ public class LinkedList<T> implements List<T> {
         return null;
     }
 
+    //Work
     //Берёт элемент переданной ноды и переходит на следующую ноду.
     private Node<T> getNextNode(Node<T> currentTarget) {
         return currentTarget.getNextElement();
     }
 
+    //Work
     //Удаляет переданную ноду за исключением первой
     private void removeNode(Node<T> currentNode) {
         Node<T> previous = currentNode.getPreviousElement();
@@ -219,6 +224,41 @@ public class LinkedList<T> implements List<T> {
         currentNode.setNextElement(null);
         currentNode.setPreviousElement(null);
         currentNode.setElement(null);
+
+        size--;
+    }
+
+    //Work
+    private void removeFirstNodeByValue(Node<T> currentNode) {
+        Node<T> next = currentNode.getNextElement();
+
+        firstNode = new Node<>(null, null, next);
+        currentNode.setPreviousElement(firstNode);
+
+        next.setPreviousElement(firstNode);
+        firstNode.setNextElement(next);
+
+        currentNode.setNextElement(null);
+        currentNode.setPreviousElement(null);
+        currentNode.setElement(null);
+
+        size--;
+    }
+
+    //Work
+    private void removeFirstNodeByIndex(Node<T> currentNode) {
+        Node<T> next = currentNode.getNextElement().getNextElement();
+
+        firstNode = new Node<>(null, null, next);
+        currentNode.setPreviousElement(firstNode);
+
+        next.setPreviousElement(firstNode);
+        firstNode.setNextElement(next);
+
+        currentNode.setNextElement(null);
+        currentNode.setPreviousElement(null);
+        currentNode.setElement(null);
+
         size--;
     }
 

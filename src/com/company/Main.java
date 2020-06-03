@@ -13,8 +13,8 @@ public class Main {
         linkedList.add(33); // index: 3
 
         System.out.println(linkedList.contains(67));
-//        System.out.println(linkedList.remove(0));
-        System.out.println(linkedList.remove(Integer.valueOf(32)));
+        System.out.println(linkedList.remove(3));
+//        System.out.println(linkedList.remove(Integer.valueOf(33)));
 
 
 
