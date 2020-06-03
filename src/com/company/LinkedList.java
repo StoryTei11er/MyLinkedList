@@ -160,10 +160,18 @@ public class LinkedList<T> implements List<T> {
         return null;
     }
 
+    //Work
     @Override
     public void add(int index, T element) {
-
+        if (index == 0) {
+            addFirstNode(element);
+        } else if (index <= size - 1) {
+            addMiddleNode(index, element);
+        } else {
+            add(element);
+        }
     }
+
 
     //Work
     @Override
@@ -288,6 +296,36 @@ public class LinkedList<T> implements List<T> {
         currentNode.setElement(null);
 
         size--;
+    }
+
+    //Work
+    private void addFirstNode(T t) {
+        Node<T> first = firstNode;
+        first.setElement(t);
+        firstNode = new Node<>(null, null, first);
+        first.setPreviousElement(firstNode);
+        size++;
+    }
+
+    //Work
+    private void addMiddleNode(int index, T t) {
+        T target = get(index);
+        Node<T> pastNode = firstNode;
+        for (int i = 0; i <= size; i++) {
+            try {
+                pastNode = getNextNode(pastNode);
+                if (pastNode.getElement().equals(target)) {
+
+                    Node<T> previous = pastNode.getPreviousElement(); // 67
+                    Node<T> middle = new Node<>(t, previous, pastNode);
+
+                    previous.setNextElement(middle);
+                    pastNode.setPreviousElement(middle);
+                    size++;
+                }
+            } catch (NullPointerException ignored) {
+            }
+        }
     }
 
 
