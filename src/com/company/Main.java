@@ -13,7 +13,7 @@ public class Main {
         linkedList.add(33); // index: 3
 
 
-        linkedList.add(2,Integer.valueOf(55));
+        linkedList.toArray();
 
 
 

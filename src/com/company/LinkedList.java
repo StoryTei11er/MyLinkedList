@@ -67,14 +67,25 @@ public class LinkedList<T> implements List<T> {
         };
     }
 
+    //Work
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        T[] array = (T[]) new Object[size];
+        for (int i = 0; i < size; i++) {
+            try {
+                T nodeElement = get(i);
+                array[i] = nodeElement;
+            } catch (NullPointerException ignored) {
+            }
+        }
+        return array;
     }
 
+    //Work
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        T[] copiedArray = (T[]) Arrays.copyOf(a, a.length, a.getClass());
+        return (T1[]) copiedArray;
     }
 
     //Work
@@ -155,9 +166,22 @@ public class LinkedList<T> implements List<T> {
         return target.getElement();
     }
 
+    //Work
     @Override
     public T set(int index, T element) {
-        return null;
+        Node<T> target = firstNode;
+        T pastElement = null;
+        for (int i = 0; i <= size; i++) {
+            try {
+                target = getNextNode(target);
+                if (i == index) {
+                    pastElement = target.element;
+                    target.setElement(element);
+                }
+            } catch (NullPointerException ignored) {
+            }
+        }
+        return pastElement;
     }
 
     //Work
