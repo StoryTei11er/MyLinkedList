@@ -289,14 +289,224 @@ public class LinkedList<T> implements List<T> {
         return finderIndex;
     }
 
+    //Work
     @Override
     public ListIterator<T> listIterator() {
-        return null;
+        return new ListIterator<T>() {
+            int currentIndex = 0;
+            int pastReturnedElement = -1;
+            int usedPrevious = 0;
+            int usedNext = 0;
+
+            //Work
+            @Override
+            public boolean hasNext() {
+                boolean isHasNext = false;
+                if (currentIndex < size) {
+                    isHasNext = true;
+                } else {
+                    isHasNext = false;
+                }
+                return isHasNext;
+            }
+
+            //Work
+            @Override
+            public T next() {
+                usedNext++;
+                T returnedElement = null;
+
+                if (currentIndex >= size) {
+                    System.out.println("Array is end!");
+                } else {
+                    returnedElement = get(currentIndex);
+                    currentIndex++;
+                    pastReturnedElement++;
+                }
+                return returnedElement;
+            }
+
+            //Work
+            @Override
+            public boolean hasPrevious() {
+                boolean isHasPrevious = false;
+                if (currentIndex == 0) {
+                    isHasPrevious = false;
+                } else {
+                    isHasPrevious = true;
+                }
+                return isHasPrevious;
+            }
+
+            //Work
+            @Override
+            public T previous() {
+                usedPrevious++;
+                T returnedElement = null;
+                if (currentIndex == 0) {
+                    System.out.println("You haven`t previous element");
+                } else {
+                    returnedElement = get(currentIndex);
+                    pastReturnedElement = currentIndex;
+                    currentIndex--;
+                }
+                return returnedElement;
+            }
+
+            //Work
+            @Override
+            public int nextIndex() {
+                int nextIndex = currentIndex + 1;
+                if (nextIndex >= size) {
+                    return size;
+                } else {
+                    return currentIndex + 1;
+                }
+            }
+
+            //Work
+            @Override
+            public int previousIndex() {
+                int previousIndex = currentIndex - 1;
+                if (previousIndex <= 0) {
+                    return -1;
+                } else {
+                    return previousIndex;
+                }
+            }
+
+            //Work
+            @Override
+            public void remove() {
+                if (usedPrevious != 0 || usedNext != 0) {
+                    LinkedList.this.remove(pastReturnedElement);
+                } else {
+                    System.out.println("You never used 'next' or 'previous' before!");
+                }
+            }
+
+            //Work
+            @Override
+            public void set(T t) {
+                LinkedList.this.set(pastReturnedElement, t);
+            }
+
+            //Work
+            @Override
+            public void add(T t) {
+                LinkedList.this.add(pastReturnedElement + 1, t);
+            }
+        };
     }
 
+    //Work
     @Override
     public ListIterator<T> listIterator(int index) {
-        return null;
+        return new ListIterator<T>() {
+            int currentIndex = index;
+            int pastReturnedElement = index - 1;
+            int usedPrevious = 0;
+            int usedNext = 0;
+
+            //Work
+            @Override
+            public boolean hasNext() {
+                boolean isHasNext = false;
+                if (currentIndex < size) {
+                    isHasNext = true;
+                } else {
+                    isHasNext = false;
+                }
+                return isHasNext;
+            }
+
+            //Work
+            @Override
+            public T next() {
+                usedNext++;
+                T returnedElement = null;
+
+                if (currentIndex >= size) {
+                    System.out.println("Array is end!");
+                } else {
+                    returnedElement = get(currentIndex);
+                    currentIndex++;
+                    pastReturnedElement++;
+                }
+                return returnedElement;
+            }
+
+            //Work
+            @Override
+            public boolean hasPrevious() {
+                boolean isHasPrevious = false;
+                if (currentIndex == 0) {
+                    isHasPrevious = false;
+                } else {
+                    isHasPrevious = true;
+                }
+                return isHasPrevious;
+            }
+
+            //Work
+            @Override
+            public T previous() {
+                usedPrevious++;
+                T returnedElement = null;
+                if (currentIndex == 0) {
+                    System.out.println("You haven`t previous element");
+                } else {
+                    returnedElement = get(currentIndex);
+                    pastReturnedElement = currentIndex;
+                    currentIndex--;
+                }
+                return returnedElement;
+            }
+
+            //Work
+            @Override
+            public int nextIndex() {
+                int nextIndex = currentIndex + 1;
+                if (nextIndex >= size) {
+                    return size;
+                } else {
+                    return currentIndex + 1;
+                }
+            }
+
+            //Work
+            @Override
+            public int previousIndex() {
+                int previousIndex = currentIndex - 1;
+                if (previousIndex <= 0) {
+                    return -1;
+                } else {
+                    return previousIndex;
+                }
+            }
+
+            //Work
+            @Override
+            public void remove() {
+                if (usedPrevious != 0 || usedNext != 0) {
+                    LinkedList.this.remove(pastReturnedElement);
+                } else {
+                    System.out.println("You never used 'next' or 'previous' before!");
+                }
+            }
+
+            //Work
+            @Override
+            public void set(T t) {
+                LinkedList.this.set(pastReturnedElement, t);
+            }
+
+            //Work
+            @Override
+            public void add(T t) {
+                LinkedList.this.add(pastReturnedElement + 1, t);
+            }
+        };
     }
 
     //Work
