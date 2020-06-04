@@ -12,9 +12,12 @@ public class Main {
         linkedList.add(34); // index: 2
         linkedList.add(33); // index: 3
 
+        linkedList1.add(67); // index: 0
+        linkedList1.add(11); // index: 1
+        linkedList1.add(44); // index: 2
+        linkedList1.add(34); // index: 3
 
-
-
+        linkedList.removeAll(linkedList1);
 
 
         System.out.println("===============================");

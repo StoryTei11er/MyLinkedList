@@ -141,20 +141,43 @@ public class LinkedList<T> implements List<T> {
         return isContain;
     }
 
+    //Work
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        boolean isAddingAll = false;
+        for (Object o : c) {
+            add((T) o);
+            isAddingAll = true;
+        }
+        return isAddingAll;
     }
 
+    //Work
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        boolean isAddingAll = false;
+        int i = 0;
+        for (Object o : c) {
+            if (i >= index) {
+                add((T) o);
+                isAddingAll = true;
+            }
+            i++;
+        }
+        return isAddingAll;
     }
 
+    //Work
     @Override
     public boolean removeAll(Collection<?> c) {
-
-        return false;
+        boolean isRemoveAll = false;
+        for (Object o : c) {
+            if (contains(o)) {
+                remove(o);
+                isRemoveAll = true;
+            }
+        }
+        return isRemoveAll;
     }
 
     @Override
